@@ -3,7 +3,7 @@ package com.sh.common;
 /**
  * @Description: 自定义异常
  * @Date: 2018-11-24 11:41
- * @Auther: 季小沫的故事
+ * @Author: 季小沫的故事
  */
 public class MyException extends RuntimeException {
 
