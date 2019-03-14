@@ -27,8 +27,8 @@ import com.alibaba.nls.client.AccessToken;
  */
 public class CreateTokenDemo {
     public static void main(String[] args) {
-        String akId = "LTAIFFQOG6EJHYaR";
-        String akSecrete = "5LkbUhLIDsOIjj3bJtuHuNKEIS6vMA";
+        String akId = "LTAIFFQOG6ABCXeR";
+        String akSecrete = "5LkbUhLKHMIxk73bJtuHuNnick6vMA";
         try {
             AccessToken accessToken = AccessToken.apply(akId, akSecrete);
             System.out.println("Created token: " + accessToken.getToken() +

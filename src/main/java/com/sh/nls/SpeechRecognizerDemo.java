@@ -35,7 +35,7 @@ import java.io.InputStream;
  * @date 2018/5/29
  */
 public class SpeechRecognizerDemo {
-    public static final String appKey = "A91vEOkRxKHPwfDd";
+    public static final String appKey = "A91vEOkuHk9LwfDd";
     public static final String accessToken = "673f87137e974443b2c5ddd521c3d036";
     public static NlsClient client;
 
