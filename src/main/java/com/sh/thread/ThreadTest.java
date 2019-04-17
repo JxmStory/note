@@ -1,4 +1,4 @@
-package com.sh.common;
+package com.sh.thread;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
