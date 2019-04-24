@@ -102,13 +102,13 @@ public class EqualTest {
     }
 
     public static void main(String[] args) {
-        equalInteger();
-//
+        equalString();
+//        equalInteger();
 //        String shh1 = "shh";
 //        String shh2 = new String("shh");
 //        System.out.println(shh1==shh2); // false 使用new表示新建了一个对象 ==比较两个对象地址
 //        System.out.println(shh1.equals(shh2)); //true String的equals方法被重写 比较的是字符串每个字符是否相等
-        Color color = Color.valueOf("RED");
+//        Color color = Color.valueOf("RED");
 //        System.out.println(color.getValue());
     }
 }
