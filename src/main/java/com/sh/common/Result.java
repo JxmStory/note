@@ -114,6 +114,16 @@ public class Result<T> {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "Result{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                ", count=" + count +
+                '}';
+    }
+
     /**
      * 将json结果集转化为TaotaoResult对象
      * 

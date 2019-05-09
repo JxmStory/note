@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserServiceInter {
 
     @Override
     public Result list() {
-        int i = 1/0;
+//        int i = 1/0;
         Result result = new Result();
         List<User> list = userDao.list();
         if(list != null){
