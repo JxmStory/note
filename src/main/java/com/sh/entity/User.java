@@ -3,13 +3,17 @@ package com.sh.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 /**
  * @Description:
  * @Date: 2018-11-24 15:00
  * @Auther: 季小沫的故事
  */
 @ApiModel(value = "user", description = "用户对象")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id", dataType = "Integer")
     private Integer id = 5;

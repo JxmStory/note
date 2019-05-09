@@ -2,12 +2,16 @@ package com.sh.entity;
 
 import com.sh.excel.XlsField;
 
+import java.io.Serializable;
+
 /**
  * @Auther: admin
  * @Date: 2019/3/4 13:35
  * @Description:
  */
-public class UserXls {
+public class UserXls implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @XlsField(name = "用户名")
     private String username;
