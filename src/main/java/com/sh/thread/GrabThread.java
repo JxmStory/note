@@ -29,7 +29,7 @@ public class GrabThread implements Runnable {
 
     public void run(){
         int i = 0;
-        while (i<30){
+        while (i<12){
             i += 1;
             try{
                 logger.info("{}开始第{}次抓取{}数据", Thread.currentThread().getName(), i, type);
@@ -38,7 +38,7 @@ public class GrabThread implements Runnable {
                     logger.info("开奖数据 : {}", lottery.toString());
                     break;
                 }else{
-                    Thread.sleep(1000*10); //休眠10秒
+                    Thread.sleep(1000*30); //休眠10秒
                 }
             }catch(Exception e){
                 logger.info("发生异常 : {}", e.getMessage());

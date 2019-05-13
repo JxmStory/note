@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -125,10 +126,12 @@ public class UserController {
 
     @PostMapping("/array")
     @ApiOperation(value = "springboot传递数组",notes = "springboot传递数组")
-    public void array(@ApiParam(name = "ids") @RequestParam("ids") Integer[] ids,
+    public Result array(@ApiParam(name = "ids") @RequestParam("ids") Integer[] ids,
                       @ApiParam(name = "strs") @RequestParam("strs") String[] strs){
-        System.out.println(ids[1]+"");
-        System.out.println(strs[2]);
+        List<Object> list = new ArrayList<>();
+        list.add(ids);
+        list.add(strs);
+        return Result.success(list);
     }
 
 }
