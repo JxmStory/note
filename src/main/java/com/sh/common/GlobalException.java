@@ -1,11 +1,12 @@
 package com.sh.common;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @Auther: admin
+ * @Auther: jxmStory
  * @Date: 2019/1/11 11:13
  * @Description: 全局异常处理
  * 捕捉controller中的异常 根据不同异常类型进行处理
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @ControllerAdvice
 public class GlobalException {
+
+    @Value("${note.printExp}")
+    private boolean printExp;
 
     /**
      * 全局异常捕捉处理
@@ -22,10 +26,11 @@ public class GlobalException {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public Result allExceptionHandler(Exception e) {
+        if (printExp) e.printStackTrace();
         String message = e.getMessage();
-        if(e.getCause()!=null) {
+        if (e.getCause()!=null) {
             String[] msg = e.getCause().getMessage().split("content:");
-            if(msg!=null&&msg.length>=2) {
+            if (msg!=null&&msg.length>=2) {
                 message = msg[1];
             }
         }
@@ -40,6 +45,7 @@ public class GlobalException {
     @ResponseBody
     @ExceptionHandler(value = MyException.class)
     public Result myExceptionHandler(MyException e) {
+        if (printExp) e.printStackTrace();
         return Result.fail(500, e.getMsg());
     }
 }

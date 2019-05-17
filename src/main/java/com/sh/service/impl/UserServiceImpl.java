@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserServiceInter {
         if(null != user) {
             result = Result.success(user);
         } else {
-            result = Result.fail(400, "找不到改用户");
+            result = Result.fail(400, "找不到该用户");
         }
         return result;
     }
