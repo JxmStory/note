@@ -15,7 +15,7 @@ public class Timing {
 
     private static final Logger logger = LoggerFactory.getLogger(Timing.class);
 
-    @Scheduled(cron = "0 02,12,22,32,42,52 10-22 * * ?")
+//    @Scheduled(cron = "0 02,12,22,32,42,52 10-22 * * ?")
     public void openCqssc() throws ParseException {
 
         int minute = DateTool.getMinute("10:00", DateTool.getTime().substring(11,16));
@@ -27,7 +27,7 @@ public class Timing {
         thread.start();
     }
 
-    @Scheduled(cron = "20 02,12,22,32,42,52 9-23 * * ?")
+//    @Scheduled(cron = "20 02,12,22,32,42,52 9-23 * * ?")
     public void openGdx() throws ParseException {
 
         int minute = DateTool.getMinute("09:00", DateTool.getTime().substring(11,16));
@@ -39,7 +39,7 @@ public class Timing {
         thread.start();
     }
 
-    @Scheduled(cron = "40 02,12,22,32,42,52 9-23 * * ?")
+//    @Scheduled(cron = "40 02,12,22,32,42,52 9-23 * * ?")
     public void openJxx() throws ParseException {
 
         int minute = DateTool.getMinute("09:00", DateTool.getTime().substring(11,16));

@@ -7,6 +7,11 @@ public class Solution {
         System.out.println(isMonotonic(A));
     }
 
+    /**
+     * 判断数组是否单调
+     * @param A
+     * @return
+     */
     public static boolean isMonotonic(int[] A) {
         if(A.length==0||A.length==1){
             return true;
