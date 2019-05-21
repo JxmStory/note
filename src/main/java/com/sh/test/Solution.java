@@ -1,5 +1,7 @@
 package com.sh.test;
 
+import com.sh.common.Assert;
+
 public class Solution {
 
     public static void main(String[] args) {

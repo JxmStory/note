@@ -34,5 +34,5 @@ logging:
     com.sh.dao : DEBUG
 
 note:
-  printExp: false # 是否控制台输出异常信息
+  printExp: true # 是否控制台输出异常信息
 

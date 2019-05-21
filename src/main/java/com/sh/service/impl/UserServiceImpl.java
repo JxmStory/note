@@ -1,5 +1,6 @@
 package com.sh.service.impl;
 
+import com.sh.common.Assert;
 import com.sh.common.MyException;
 import com.sh.common.Result;
 import com.sh.dao.UserDao;
@@ -23,8 +24,8 @@ public class UserServiceImpl implements UserServiceInter {
 
     @Override
     public Result getMaster(Integer id) {
-        if(null == id)
-            throw new MyException("id不能为空");
+        // 使用断言判断id非空
+        Assert.notNull(id, "id不能为空");
         Result result = new Result();
         User user = userDao.getMaster(id);
         if(null != user) {
