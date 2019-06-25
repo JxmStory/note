@@ -11,8 +11,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * RocketMQ 消费者
+ * 注入到Spring
+ * 实现ApplicationRunner接口以实现SpringBoot项目启动时执行消费者方法
+ */
 @Component
 public class Customer implements ApplicationRunner {
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         /**
@@ -44,6 +50,7 @@ public class Customer implements ApplicationRunner {
                         + " Receive New Message: " + msgs.size());
 
                 MessageExt msg = msgs.get(0);
+                // 处理Topic1下面的 Tag1和Tag3消息
                 if ("Topic1".equals(msg.getTopic())) {
                     if (null != msg.getTags()) {
                         switch (msg.getTags()) {
@@ -56,16 +63,20 @@ public class Customer implements ApplicationRunner {
                         }
                     }
                 }
-
+                // 处理Topic2下面所有消息
                 if ("Topic2".equals(msg.getTopic())) {
                     System.out.println(new String(msg.getBody()));
                 }
 
+                // 返回消息的消费结果
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
 
             }
         });
 
+        /**
+         * 只需启动一次 即项目启动时运行
+         */
         consumer.start();
     }
 }
