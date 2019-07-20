@@ -1,9 +1,11 @@
 package com.sh.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -26,11 +28,15 @@ public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("This is filter -------- ");
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type");
-        response.addHeader("Access-Control-Max-Age", "1800");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String uri = request.getRequestURI();
+        if (uri.startsWith("/api")) {
+            String method = request.getParameter("method");
+            if (StringUtils.isNotBlank(method)) {
+                String path = uri + "/" + method;
+                request.getRequestDispatcher(path).forward(servletRequest,servletResponse);
+            }
+        }
         filterChain.doFilter(servletRequest, servletResponse); //执行后续过滤器
         return;
     }

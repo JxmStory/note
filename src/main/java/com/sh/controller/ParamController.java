@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("Param")
+@RequestMapping("/api/param")
 public class ParamController {
 
     /*
@@ -23,7 +23,7 @@ public class ParamController {
             "time":"1500693926"
         }
      */
-    @RequestMapping("Map")
+    @RequestMapping("map")
     public String getMap(@RequestBody Map<String, Object> map) {
 
 //        JSONObject json = (JSONObject) map.get("data"); // 抛异常
@@ -36,5 +36,10 @@ public class ParamController {
         JSONObject data = JSON.parseObject(jsonStr);
         System.out.println(data.getString("name"));
         return "success";
+    }
+
+    @RequestMapping("user")
+    public String user(@RequestBody Map<String, String> map) {
+        return map.get("name");
     }
 }

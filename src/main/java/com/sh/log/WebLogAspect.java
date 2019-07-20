@@ -48,7 +48,9 @@ public class WebLogAspect {
     public void after(Result result){
 
         logger.info("RESPONSE : {}", result.toString());
-        logger.info("SPEND_TIME : {}", System.currentTimeMillis() - startTime.get());
+        long time = System.currentTimeMillis() - startTime.get();
+        logger.info("SPEND_TIME : {}", time);
+        result.setSpendTime(time);
         startTime.remove();
 
     }
