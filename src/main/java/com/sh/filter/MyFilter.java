@@ -1,5 +1,8 @@
 package com.sh.filter;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.sh.utils.StreamUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 
@@ -28,16 +31,26 @@ public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("This is filter -------- ");
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
+
+        ServletRequest requestWrapper = new MyRequestWrapper((HttpServletRequest) servletRequest);
+        //获取json
+        String paramJson = StreamUtil.getBodyString(requestWrapper);
+        System.out.println(paramJson);
+        HttpServletRequest request = (HttpServletRequest) requestWrapper;
         String uri = request.getRequestURI();
         if (uri.startsWith("/api")) {
-            String method = request.getParameter("method");
+            JSONObject json = JSONObject.parseObject(paramJson);
+            String method = json.getString("method");
             if (StringUtils.isNotBlank(method)) {
                 String path = uri + "/" + method;
-                request.getRequestDispatcher(path).forward(servletRequest,servletResponse);
+                System.out.println(path);
+                request.getRequestDispatcher(path).forward(requestWrapper,servletResponse);
+            } else {
+                filterChain.doFilter(requestWrapper, servletResponse); //执行后续过滤器
             }
+        } else {
+            filterChain.doFilter(requestWrapper, servletResponse); //执行后续过滤器
         }
-        filterChain.doFilter(servletRequest, servletResponse); //执行后续过滤器
         return;
     }
 
