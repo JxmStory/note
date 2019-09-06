@@ -1,15 +1,17 @@
 package com.sh.filter;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sh.utils.StreamUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.MediaType;
+import sun.rmi.runtime.Log;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -23,6 +25,8 @@ import java.io.IOException;
 @Order(1)
 public class MyFilter implements Filter {
 
+    private Logger logger = LoggerFactory.getLogger(MyFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -30,27 +34,35 @@ public class MyFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("This is filter -------- ");
 
+        logger.info("【过滤器】对请求进行路由判断");
+        /*
+         * 使用自定义装饰类MyRequestWrapper对ServletRequest进行包装
+         *
+         */
         ServletRequest requestWrapper = new MyRequestWrapper((HttpServletRequest) servletRequest);
-        //获取json
-        String paramJson = StreamUtil.getBodyString(requestWrapper);
-        System.out.println(paramJson);
         HttpServletRequest request = (HttpServletRequest) requestWrapper;
         String uri = request.getRequestURI();
         if (uri.startsWith("/api")) {
-            JSONObject json = JSONObject.parseObject(paramJson);
-            String method = json.getString("method");
+            String method = "";
+            if (MediaType.APPLICATION_JSON_VALUE.equals(requestWrapper.getContentType())) {
+                //获取json
+                String paramJson = StreamUtil.getBodyString(requestWrapper);
+                JSONObject json = JSONObject.parseObject(paramJson);
+                if (json != null) {
+                    method = json.getString("method");
+                }
+            } else {
+                method = request.getParameter("method");
+            }
             if (StringUtils.isNotBlank(method)) {
                 String path = uri + "/" + method;
-                System.out.println(path);
+                logger.info("【过滤器】method={},转向{}", method, path);
                 request.getRequestDispatcher(path).forward(requestWrapper,servletResponse);
-            } else {
-                filterChain.doFilter(requestWrapper, servletResponse); //执行后续过滤器
+                return;
             }
-        } else {
-            filterChain.doFilter(requestWrapper, servletResponse); //执行后续过滤器
         }
+        filterChain.doFilter(requestWrapper, servletResponse); //执行后续过滤器
         return;
     }
 
