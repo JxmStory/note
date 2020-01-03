@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @Description:
  * @Date: 2018-11-27 17:06
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 public class EqualTest {
 

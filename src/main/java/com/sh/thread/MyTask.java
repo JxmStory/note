@@ -12,7 +12,7 @@ public class MyTask implements Runnable {
     public void run(){
         System.out.println("正在执行任务：" + taskNum);
         try {
-            Thread.currentThread().sleep(4000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

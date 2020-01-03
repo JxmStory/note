@@ -19,7 +19,7 @@ import java.io.IOException;
  * 过滤器Filter是servlet的一种规范 只能用于web程序 依赖于servlet 在请求前后起作用
  * 执行顺序 filter->interceptor->Aop
  * @Date: 2019-5-20 15:41
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 @WebFilter(urlPatterns = "/*", filterName = "requestFilter")
 @Order(1)

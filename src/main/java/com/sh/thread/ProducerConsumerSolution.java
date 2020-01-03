@@ -5,7 +5,7 @@ import java.util.Vector;
 /**
  * @Description:
  * @Date: 2018-11-30 17:04
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 public class ProducerConsumerSolution {
 

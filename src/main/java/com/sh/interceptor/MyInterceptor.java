@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * 拦截器是Spring的组件 可以注入spring容器中的bean 可以深入到方法前后 方法异常前后
  * 执行顺序 filter->interceptor->Aop
  * @Date: 2019-5-21 10:41
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 public class MyInterceptor extends HandlerInterceptorAdapter {
 
