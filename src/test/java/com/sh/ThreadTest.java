@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class ThreadTest {
 
     @Test
-    public void fixExcetors() {
+    public void fixExecutors() {
         ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("test-pool-%d").build();
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5, threadFactory);
         fixedThreadPool.submit(new MyTask(1));
