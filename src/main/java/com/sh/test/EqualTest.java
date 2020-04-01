@@ -86,6 +86,11 @@ public class EqualTest {
     }
 
 
+    /**
+     * 所有包装类型对象值的比较，全部使用equals判断
+     * eg：对于Integer对象赋值，数值在-128~127之间的对象是在IntegerChe.chache产生，会复用已有对象
+     *     这个区间值的判断可以用==，在此之外的值的对象会在堆上产生，并不会复用。
+     */
     public static void equalInteger() {
         Integer a = 100, b = 100;
         Integer c = 1000, d = 1000;
