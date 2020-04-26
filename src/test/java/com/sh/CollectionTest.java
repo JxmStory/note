@@ -1,6 +1,7 @@
 package com.sh;
 
 import com.alibaba.fastjson.JSONArray;
+import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,6 +103,54 @@ public class CollectionTest {
 
         return list;
 
+    }
+
+
+    /**
+     *  Arrays.asList(arr); 方法返回Arrays类的内部类ArrayList
+     *  同时通过构造函数将arr的引用给内部类ArrayList的类变量
+     *  内部类ArrayList重写了get set size等方法直接对arr进行操作
+     *  但add remove方法没有重写 直接调用使用父类AbstractList的方法
+     *  @author micomo
+     *  @date 2020/4/26 18:09
+     *  @link https://blog.csdn.net/u014634309/article/details/105700463
+     */
+    @Test
+    public void arrayToList() {
+        String[] arr = {"a", "b", "c", "d"};
+        List<String> list = Arrays.asList(arr);
+
+        /**
+         * array=[a, b, c, d]
+         * list=[a, b, c, d]
+         */
+        logger.info("array={}", Arrays.toString(arr));
+        logger.info("list={}", list);
+
+        arr[0] = "x";
+        list.set(1, "y");
+
+        /**
+         * array=[x, y, c, d]
+         * list=[x, y, c, d]
+         */
+        logger.info("array={}", Arrays.toString(arr));
+        logger.info("list={}", list);
+
+
+        // throw java.lang.UnsupportedOperationException
+        list.add("z");
+        // throw java.lang.UnsupportedOperationException
+        list.remove(3);
+
+        /**
+         * 推荐使用
+         * newArrayList(arr) 方法会新建一个ArrayList对象list
+         * 同时把数组元素添加到list中
+         */
+        List<String> strList = Lists.newArrayList(arr);
+        strList.add("e");
+        logger.info("strList={}", strList);
     }
 
 }
