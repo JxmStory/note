@@ -115,5 +115,20 @@ public class EqualTest {
 //        System.out.println(shh1.equals(shh2)); //true String的equals方法被重写 比较的是字符串每个字符是否相等
 //        Color color = Color.valueOf("RED");
 //        System.out.println(color.getValue());
+        Integer a = 10;
+        Integer b = Integer.valueOf(10);
+        Integer c = new Integer(10);
+        int d = 10;
+        Integer e = a;
+        System.out.println(a==b);
+        System.out.println(a==c);
+        System.out.println(a==d);
+        System.out.println(a==e);
+        System.out.println(b==c);
+        System.out.println(b==d);
+        System.out.println(b==e);
+        System.out.println(c==d);
+        System.out.println(c==e);
+        System.out.println(d==e);
     }
 }

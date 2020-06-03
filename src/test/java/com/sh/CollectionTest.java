@@ -2,6 +2,7 @@ package com.sh;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
+import com.sh.entity.User;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,14 @@ public class CollectionTest {
         logger.info("【list<map>排序】 排序后：{}", JSONArray.toJSONString(list));
     }
 
+    @Test
+    public void sort2() {
+        List<Map<String,Object>> list = getList();
+        logger.info("【list<map>排序】 排序前：{}", JSONArray.toJSONString(list));
+        list.sort(Comparator.comparing((Map map) -> (String) map.get("code"))
+        .thenComparing(map -> (String) map.get("name")));
+        logger.info("【list<map>排序】 排序后：{}", JSONArray.toJSONString(list));
+    }
 
     @Test
     public void filter() {
@@ -93,12 +102,12 @@ public class CollectionTest {
 
         Map<String, Object> map3 = new HashMap<String, Object>();
         map3.put("name", "chongqing");
-        map3.put("code", "6");
+        map3.put("code", "1");
         list.add(map3);
 
         Map<String, Object> map4 = new HashMap<String, Object>();
         map4.put("name", "tianjin");
-        map4.put("code", "0");
+        map4.put("code", "6");
         list.add(map4);
 
         return list;
