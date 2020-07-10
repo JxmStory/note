@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @Description: 断言类(用于入参判断)
  * @Date: 2019-5-20 15:41
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 public abstract class Assert {
 

@@ -1,0 +1,37 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    name: mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+    master:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/note_master?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+      username: root
+      password: uAiqwVwjJ8-i
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      max-wait: 20
+    slave:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/note_slave?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+      username: root
+      password: uAiqwVwjJ8-i
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      max-wait: 20
+
+mybatis:
+  mapper-locations: classpath:com/sh/mapper/*.xml
+  type-aliases-package: com.sh.entity
+
+
+logging:
+  level:
+    com.sh.dao: DEBUG
+
+note:
+  printExp: true # 是否控制台输出异常信息

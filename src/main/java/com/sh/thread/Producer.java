@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 /**
  * @Description:
  * @Date: 2018-11-30 17:02
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 public class Producer implements Runnable {
 

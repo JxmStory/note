@@ -2,7 +2,10 @@ package com.sh.log;
 
 import com.sh.common.Result;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,7 +13,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.util.Arrays;
 
 @Aspect
@@ -48,7 +50,9 @@ public class WebLogAspect {
     public void after(Result result){
 
         logger.info("RESPONSE : {}", result.toString());
-        logger.info("SPEND_TIME : {}", System.currentTimeMillis() - startTime.get());
+        long time = System.currentTimeMillis() - startTime.get();
+        logger.info("SPEND_TIME : {}", time);
+        result.setSpendTime(time);
         startTime.remove();
 
     }

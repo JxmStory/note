@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @Auther: micomo
+ * @Author: micomo
  * @Date: 2019/3/4 11:38
  * @Description: Excel 模板类字段注解
  */

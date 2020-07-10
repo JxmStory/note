@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @Auther: jxmStory
+ * @Author: jxmStory
  * @Date: 2019/1/11 11:13
  * @Description: 全局异常处理
  * 捕捉controller中的异常 根据不同异常类型进行处理

@@ -6,6 +6,7 @@ import com.sh.entity.User;
 import com.sh.entity.UserXls;
 import com.sh.excel.ExcelFormat;
 import com.sh.excel.ExcelUtils;
+import com.sh.juc.UserService;
 import com.sh.service.inter.UserServiceInter;
 import io.swagger.annotations.*;
 import jxl.format.Colour;
@@ -23,7 +24,7 @@ import java.util.List;
 /**
  * @Description:
  * @Date: 2018-11-24 15:41
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 @RestController
 @RequestMapping("/api/user")
@@ -33,6 +34,9 @@ public class UserController {
 
     @Autowired
     private UserServiceInter userService;
+
+    @Autowired
+    private UserService jucUserService;
 
     /**
      *  service的异常会向上抛到controller
@@ -134,4 +138,13 @@ public class UserController {
         return Result.success(list);
     }
 
+    @GetMapping("/update1")
+    public Result update1() {
+        return jucUserService.update1();
+    }
+
+    @GetMapping("/update2")
+    public Result update2() {
+        return jucUserService.update2();
+    }
 }

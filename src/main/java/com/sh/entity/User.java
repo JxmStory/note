@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * @Description:
  * @Date: 2018-11-24 15:00
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 @ApiModel(value = "user", description = "用户对象")
 public class User implements Serializable {

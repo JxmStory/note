@@ -5,7 +5,7 @@ import com.sh.entity.User;
 /**
  * @Description: 其实java只有值传递，引用传递其实也是传递了对象引用的拷贝（传递对象地址）
  * @Date: 2018-12-06 10:21
- * @Auther: 季小沫的故事
+ * @Author: micomo
  */
 public class ParamTo {
 
