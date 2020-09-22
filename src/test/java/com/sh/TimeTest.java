@@ -1,13 +1,16 @@
 package com.sh;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sh.utils.DateTool;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 //@RunWith(SpringRunner.class)
 @SpringBootTest
@@ -49,5 +52,19 @@ public class TimeTest {
         void setData(Object data) {
             this.data = data;
         }
+    }
+
+    @Test
+    public void JsonTest() {
+        JSONObject json = new JSONObject();
+        json.put("name", "songhuihui");
+        double amount = 12.00;
+        json.put("amount", amount);
+        json.put("date", "2018-2-02");
+        System.out.println(json.toJSONString());
+        System.out.println(JSON.toJSONString(json));
+        Map<String, Object> map = new HashMap<>();
+        map.put("json", json);
+        System.out.println(JSON.toJSONString(map.get("json")));
     }
 }
