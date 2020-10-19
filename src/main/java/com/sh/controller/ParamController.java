@@ -121,6 +121,8 @@ public class ParamController {
             URL realUrl = new URL(url);
             // 打开和URL之间的连接
             URLConnection conn = realUrl.openConnection();
+            conn.setRequestProperty("token", "04F685A1D4318651C29954123AD272");
+            conn.setRequestProperty("fileName", "one.jpg");
             // 设置通用的请求属性
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
