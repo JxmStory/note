@@ -106,8 +106,18 @@ public class StrTest {
 
     public static void main(String[] args) {
 
-        System.out.println(getNewStr("getChannelADOrHy", 5));
-        System.out.println(getOldStr(getNewStr("getChannelADOrHy", 5), 5));
+        System.out.println(getNewStr("index", 6));
+        System.out.println(getNewStr("status", 5));
+        System.out.println(getNewStr("statusName", 5));
+        System.out.println(getNewStr("capital", 5));
+        System.out.println(getNewStr("rateAmt", 5));
+        System.out.println(getNewStr("commAmt", 5));
+        System.out.println(getNewStr("overAmt", 5));
+        System.out.println(getNewStr("txsAmt", 5));
+        System.out.println(getNewStr("backAmt", 5));
+        System.out.println(getNewStr("backTime", 5));
+        System.out.println(getNewStr("passDate", 5));
+
 
     }
 }
