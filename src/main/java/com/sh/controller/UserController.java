@@ -6,7 +6,6 @@ import com.sh.entity.User;
 import com.sh.entity.UserXls;
 import com.sh.excel.ExcelFormat;
 import com.sh.excel.ExcelUtils;
-import com.sh.juc.UserService;
 import com.sh.service.inter.UserServiceInter;
 import io.swagger.annotations.*;
 import jxl.format.Colour;
@@ -34,9 +33,6 @@ public class UserController {
 
     @Autowired
     private UserServiceInter userService;
-
-    @Autowired
-    private UserService jucUserService;
 
     /**
      *  service的异常会向上抛到controller
@@ -138,31 +134,4 @@ public class UserController {
         return Result.success(list);
     }
 
-    @GetMapping("/update1")
-    public Result update1() {
-        return jucUserService.update1();
-    }
-
-    /**
-     *  先调用update2 再调用update3
-     *
-     *  整个事务过程： 假设数据库用户名称为abc （2、3顺序无所谓）
-     *
-     *  1.update2开启事务读取到用户名称abc
-     *  2.update2开始休眠（模拟事务处理中）
-     *  3.update3开启事务读取到用户名称abc
-     *  4.update3修改用户名称为bbb并提交事务 （此时数据库里用户名称为bbb）
-     *  5.update2结束休眠，再次读取到的用户名称是abc （读取的是快照中的）
-     *  6.update2修改用户名称为aaa并提交事务 （此时数据库里用户名称为aaa）
-     *
-     */
-    @GetMapping("/update2")
-    public Result update2() {
-        return jucUserService.update2();
-    }
-
-    @GetMapping("/update3")
-    public Result update3() {
-        return jucUserService.update3();
-    }
 }

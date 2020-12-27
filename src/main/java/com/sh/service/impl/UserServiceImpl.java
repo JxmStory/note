@@ -63,6 +63,18 @@ public class UserServiceImpl implements UserServiceInter {
     }
 
     @Override
+    public Result updateSlave(User user) {
+        Result result = new Result();
+        Integer i = userDao.update(user);
+        if(i>0) {
+            result = Result.success();
+        } else {
+            result = Result.fail(500,"更新失败");
+        }
+        return result;
+    }
+
+    @Override
     public Result list() {
 //        int i = 1/0;
         Result result = new Result();

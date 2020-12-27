@@ -24,6 +24,9 @@ public interface UserServiceInter {
     // 不加注解使用默认数据库master
     Result update(User user);
 
+    @DataSourceChoose(value = "slave")
+    Result updateSlave(User user);
+
     @DataSourceChoose(value = "master")
     Result list();
 

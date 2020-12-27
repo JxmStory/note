@@ -12,7 +12,19 @@
     </select>
 
     <update id="update" parameterType="user">
-        UPDATE t_user SET username = #{username} WHERE id = #{id}
+        UPDATE t_user
+        <set>
+            <if test="username != null and username !=''">
+                username = #{username},
+            </if>
+            <if test="password != null and password !=''">
+                password = #{password},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+        </set>
+        WHERE id = #{id}
     </update>
 
     <select id="list" resultType="user">
