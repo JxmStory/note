@@ -1,5 +1,6 @@
 package com.sh;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
 import com.sh.entity.User;
@@ -160,6 +161,67 @@ public class CollectionTest {
         List<String> strList = Lists.newArrayList(arr);
         strList.add("e");
         logger.info("strList={}", strList);
+    }
+
+
+
+    public static void main(String[] args) {
+        List<User> list = new ArrayList<>();
+        User user = new User();
+        user.setUsername("ah2");
+        User user2 = new User();
+        user2.setUsername("ah1");
+        User user3 = new User();
+        user3.setUsername("1b-c");
+        User user4 = new User();
+        user4.setUsername("!c");
+        list.add(user);
+        list.add(user2);
+        list.add(user3);
+        list.add(user4);
+        list.sort((u1, u2) ->
+                {
+                    char[] v1 = u1.getUsername().toCharArray();
+                    char[] v2 = u2.getUsername().toCharArray();
+                    int len1 = v1.length;
+                    int len2 = v2.length;
+                    int lim = Math.min(len1, len2);
+                    int k = 0;
+                    while (k < lim) {
+                        char c1 = v1[k];
+                        char c2 = v2[k];
+                        if (c1 != c2) {
+                            if (c1 >= 65 && c1 <= 122) {
+                                if (c2 >= 65 && c2 <= 122) {
+                                    return c1 - c2;
+                                } else {
+                                    return -1;
+                                }
+                            } else if (c1 >= 48 && c1 <= 57) {
+                                if (c2 >= 65 && c2 <= 122) {
+                                    return 1;
+                                } else if (c2 >= 48 && c2 <= 57) {
+                                    return c1 - c2;
+                                } else {
+                                    return -1;
+                                }
+                            } else {
+                                if (c2 >= 65 && c2 <= 122) {
+                                    return 1;
+                                } else if (c2 >= 48 && c2 <= 57) {
+                                    return 1;
+                                } else {
+                                    return c1 - c2;
+                                }
+                            }
+                        }
+                        k++;
+                    }
+                    return len1 - len2;
+                }
+        );
+
+        System.out.println(JSON.toJSONString(list));
     }
 
 }
