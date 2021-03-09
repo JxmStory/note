@@ -72,13 +72,12 @@ public class TransactionAspect {
             return false;
         }
 
-        for (String beanName : managerNames) {
-            DataSourceTransactionManager manager = (DataSourceTransactionManager) SpringUtil.getBean(beanName);
-
-            TransactionStatus transactionStatus = manager.getTransaction(new DefaultTransactionDefinition());
-            tsStack.push(transactionStatus);
-            dstmStack.push(manager);
-        }
+//        for (String beanName : managerNames) {
+//            DataSourceTransactionManager manager = (DataSourceTransactionManager) SpringUtil.getBean(beanName);
+//            TransactionStatus transactionStatus = manager.getTransaction(new DefaultTransactionDefinition());
+//            tsStack.push(transactionStatus);
+//            dstmStack.push(manager);
+//        }
         return true;
     }
 

@@ -21,25 +21,25 @@ public class CollectionTest {
 
     @Test
     public void sort() {
-        List<Map<String,Object>> list = getList();
+        List<Map<String, Object>> list = getList();
         logger.info("【list<map>排序】 排序前：{}", JSONArray.toJSONString(list));
-        list.sort((Map<String,Object> m1,Map<String,Object> m2) ->
+        list.sort((Map<String, Object> m1, Map<String, Object> m2) ->
                 ((String) m1.get("code")).compareTo((String) m2.get("code")));
         logger.info("【list<map>排序】 排序后：{}", JSONArray.toJSONString(list));
     }
 
     @Test
     public void sort2() {
-        List<Map<String,Object>> list = getList();
+        List<Map<String, Object>> list = getList();
         logger.info("【list<map>排序】 排序前：{}", JSONArray.toJSONString(list));
         list.sort(Comparator.comparing((Map map) -> (String) map.get("code"))
-        .thenComparing(map -> (String) map.get("name")));
+                .thenComparing(map -> (String) map.get("name")));
         logger.info("【list<map>排序】 排序后：{}", JSONArray.toJSONString(list));
     }
 
     @Test
     public void filter() {
-        List<Map<String,Object>> list = getList();
+        List<Map<String, Object>> list = getList();
         logger.info("【list<map>筛选】 筛选：{}", JSONArray.toJSONString(list));
         list = list.stream().filter(map -> ((String) map.get("name")).startsWith("c"))
                 .collect(toList());
@@ -86,10 +86,9 @@ public class CollectionTest {
     }
 
 
+    private List<Map<String, Object>> getList() {
 
-    private List<Map<String,Object>> getList() {
-
-        List<Map<String,Object>> list = new ArrayList<>();
+        List<Map<String, Object>> list = new ArrayList<>();
 
         Map<String, Object> map1 = new HashMap<String, Object>();
         map1.put("name", "beijing");
@@ -117,13 +116,14 @@ public class CollectionTest {
 
 
     /**
-     *  Arrays.asList(arr); 方法返回Arrays类的内部类ArrayList
-     *  同时通过构造函数将arr的引用给内部类ArrayList的类变量
-     *  内部类ArrayList重写了get set size等方法直接对arr进行操作
-     *  但add remove方法没有重写 直接调用使用父类AbstractList的方法
-     *  @author micomo
-     *  @date 2020/4/26 18:09
-     *  @link https://blog.csdn.net/u014634309/article/details/105700463
+     * Arrays.asList(arr); 方法返回Arrays类的内部类ArrayList
+     * 同时通过构造函数将arr的引用给内部类ArrayList的类变量
+     * 内部类ArrayList重写了get set size等方法直接对arr进行操作
+     * 但add remove方法没有重写 直接调用使用父类AbstractList的方法
+     *
+     * @author micomo
+     * @date 2020/4/26 18:09
+     * @link https://blog.csdn.net/u014634309/article/details/105700463
      */
     @Test
     public void arrayToList() {
@@ -162,7 +162,6 @@ public class CollectionTest {
         strList.add("e");
         logger.info("strList={}", strList);
     }
-
 
 
     public static void main(String[] args) {

@@ -2,6 +2,8 @@ package com.sh.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sh.common.InviteMarquee;
+import com.sh.common.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -154,5 +156,10 @@ public class ParamController {
             System.out.println("异常," + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping("inviteList")
+    public Result inviteList() {
+        return Result.success(InviteMarquee.getList());
     }
 }
