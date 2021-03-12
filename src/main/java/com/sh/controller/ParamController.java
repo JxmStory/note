@@ -160,6 +160,6 @@ public class ParamController {
 
     @RequestMapping("inviteList")
     public Result inviteList() {
-        return Result.success(InviteMarquee.getList());
+        return Result.success(InviteMarquee.list);
     }
 }
