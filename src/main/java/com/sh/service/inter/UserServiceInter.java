@@ -13,7 +13,6 @@ import java.util.List;
  */
 public interface UserServiceInter {
 
-
     // 自定义注解 values为所选数据库
     @DataSourceChoose(value = "master")
     Result getMaster(Integer id);

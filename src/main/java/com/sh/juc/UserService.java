@@ -2,6 +2,7 @@ package com.sh.juc;
 
 import com.sh.common.Result;
 import com.sh.dao.UserDao;
+import com.sh.dbsource.TransactionAppoint;
 import com.sh.entity.User;
 import com.sh.service.inter.UserServiceInter;
 import org.slf4j.Logger;
@@ -152,16 +153,20 @@ public class UserService {
 
     /**
      *  多数据源下事务测试
+     *  使用默认事务管理器 会导致只修改成功主库的数据
+     *  使用自定义注解事务管理器 可以同步修改主从数据库数据
      *  @author micomo
      *  @date 2020/12/27 15:32
      */
-    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+//    @Transactional(value = "transactionManager", rollbackFor = Exception.class)
+    @TransactionAppoint(value = {"masterTransaction", "slaveTransaction"})
     public Result getUserManyDataSource() {
         Result result = new Result();
         User user = userDao.getMaster(1);
         user.setUsername("abcdeft");
         result = userServiceInter.update(user);
         logger.info("【多数据源下事务测试】 result={}", result.toString());
+        int i = 1/0;
         result = userServiceInter.updateSlave(user);
         logger.info("【多数据源下事务测试】 result={}", result.toString());
         return result;

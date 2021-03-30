@@ -1,10 +1,12 @@
 package com.sh.dbsource;
 
+import com.sh.utils.SpringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -17,7 +19,7 @@ import java.util.Stack;
 @Configuration
 public class TransactionAspect {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TransactionAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(TransactionAspect.class);
 
 
     @Pointcut("@annotation(com.sh.dbsource.TransactionAppoint)")
@@ -34,22 +36,15 @@ public class TransactionAspect {
     public Object twiceAsOld(ProceedingJoinPoint thisJoinPoint, TransactionAppoint annotation) throws Throwable {
         Stack<DataSourceTransactionManager> dstmStack = new Stack<DataSourceTransactionManager>();
         Stack<TransactionStatus> tsStack = new Stack<TransactionStatus>();
-
         try {
-
             if (!openTransaction(dstmStack, tsStack, annotation)) {
                 return null;
             }
-
             Object ret = thisJoinPoint.proceed();
-
             commit(dstmStack, tsStack);
-
             return ret;
         } catch (Throwable e) {
-
             rollback(dstmStack, tsStack);
-
             logger.error(String.format("MultiTransactionalAspect, method:%s-%s occors error:",
                     thisJoinPoint.getTarget().getClass().getSimpleName(), thisJoinPoint.getSignature().getName()), e);
             throw e;
@@ -72,12 +67,12 @@ public class TransactionAspect {
             return false;
         }
 
-//        for (String beanName : managerNames) {
-//            DataSourceTransactionManager manager = (DataSourceTransactionManager) SpringUtil.getBean(beanName);
-//            TransactionStatus transactionStatus = manager.getTransaction(new DefaultTransactionDefinition());
-//            tsStack.push(transactionStatus);
-//            dstmStack.push(manager);
-//        }
+        for (String beanName : managerNames) {
+            DataSourceTransactionManager manager = (DataSourceTransactionManager) SpringUtils.getBean(beanName);
+            TransactionStatus transactionStatus = manager.getTransaction(new DefaultTransactionDefinition());
+            tsStack.push(transactionStatus);
+            dstmStack.push(manager);
+        }
         return true;
     }
 

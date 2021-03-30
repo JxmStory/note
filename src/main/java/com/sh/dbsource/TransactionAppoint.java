@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD,ElementType.PARAMETER})
-@interface TransactionAppoint {
+public @interface TransactionAppoint {
 
     String[] value() default {};
 
