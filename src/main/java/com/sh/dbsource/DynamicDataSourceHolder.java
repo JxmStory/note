@@ -10,4 +10,8 @@ public class DynamicDataSourceHolder {
     public static String getDataSouce() {
         return holder.get();
     }
+
+    public static void removeDataSource() {
+        holder.remove();
+    }
 }

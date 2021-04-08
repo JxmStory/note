@@ -166,7 +166,6 @@ public class UserService {
         user.setUsername("abcdeft");
         result = userServiceInter.update(user);
         logger.info("【多数据源下事务测试】 result={}", result.toString());
-        int i = 1/0;
         result = userServiceInter.updateSlave(user);
         logger.info("【多数据源下事务测试】 result={}", result.toString());
         return result;

@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -87,14 +86,14 @@ public class DataSourceConfig {
     // 主库事务管理器
     @Bean
     @Qualifier("masterTransaction")
-    public PlatformTransactionManager masterTransaction(@Qualifier("master") DataSource masterDataSource) {
+    public DataSourceTransactionManager masterTransaction(@Qualifier("master") DataSource masterDataSource) {
         return new DataSourceTransactionManager(masterDataSource);
     }
 
     // 从库事务管理器
     @Bean
     @Qualifier("slaveTransaction")
-    public PlatformTransactionManager slaveTransaction(@Qualifier("slave") DataSource slaveDataSource) {
+    public DataSourceTransactionManager slaveTransaction(@Qualifier("slave") DataSource slaveDataSource) {
         return new DataSourceTransactionManager(slaveDataSource);
     }
 
