@@ -1,5 +1,6 @@
 package com.sh.dbsource;
 
+import com.sh.common.MyException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -59,7 +60,7 @@ public class DataSourceAspect  {
                 LOGGER.info("========获取的数据源为: {}=========", data.value());
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            throw new MyException("获取数据源异常");
         }
     }
 
