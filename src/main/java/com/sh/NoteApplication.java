@@ -8,10 +8,11 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
 @SpringBootApplication
-@EnableScheduling //开启定时任务
-@MapperScan(basePackages = {"com.sh.dao"}) //dao类无需再加@Mapper
-@ServletComponentScan(basePackages = {"com.sh.filter"}) //扫描过滤器
+@EnableScheduling // 开启定时任务
+@MapperScan(basePackages = {"com.sh.dao"}) // dao类无需再加@Mapper
+@ServletComponentScan(basePackages = {"com.sh.filter"}) // 扫描过滤器
 @EnableSwagger2
 public class NoteApplication {
 

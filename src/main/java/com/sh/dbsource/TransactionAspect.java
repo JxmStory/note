@@ -27,7 +27,7 @@ public class TransactionAspect {
     }
 
 
-    @Pointcut("execution(* com.sh.controller..*.*(..))")
+    @Pointcut("execution(* com.sh.juc..*.*(..))")
     public void excudeController() {
     }
 
@@ -45,7 +45,7 @@ public class TransactionAspect {
             return ret;
         } catch (Throwable e) {
             rollback(dstmStack, tsStack);
-            logger.error(String.format("MultiTransactionalAspect, method:%s-%s occors error:",
+            logger.error(String.format("【事务管理切面】, 方法:%s-%s 出现异常:",
                     thisJoinPoint.getTarget().getClass().getSimpleName(), thisJoinPoint.getSignature().getName()), e);
             throw e;
         }

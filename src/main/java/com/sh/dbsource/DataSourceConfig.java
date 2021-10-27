@@ -28,16 +28,16 @@ public class DataSourceConfig {
     @Primary
     @Bean(name = "master")
     @Qualifier("master")
-    @ConfigurationProperties(prefix="spring.datasource.master")
-    public DataSource getMasterSource(){
+    @ConfigurationProperties(prefix = "spring.datasource.master")
+    public DataSource getMasterSource() {
         return DataSourceBuilder.create().build();
     }
 
     // 从数据源
     @Bean(name = "slave")
     @Qualifier("slave")
-    @ConfigurationProperties(prefix="spring.datasource.slave")
-    public DataSource getSlaveSource(){
+    @ConfigurationProperties(prefix = "spring.datasource.slave")
+    public DataSource getSlaveSource() {
         return DataSourceBuilder.create().build();
     }
 
@@ -84,14 +84,14 @@ public class DataSourceConfig {
     }
 
     // 主库事务管理器
-    @Bean
+    @Bean(name = "masterTransaction")
     @Qualifier("masterTransaction")
     public DataSourceTransactionManager masterTransaction(@Qualifier("master") DataSource masterDataSource) {
         return new DataSourceTransactionManager(masterDataSource);
     }
 
     // 从库事务管理器
-    @Bean
+    @Bean(name = "slaveTransaction")
     @Qualifier("slaveTransaction")
     public DataSourceTransactionManager slaveTransaction(@Qualifier("slave") DataSource slaveDataSource) {
         return new DataSourceTransactionManager(slaveDataSource);

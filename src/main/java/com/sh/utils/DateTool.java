@@ -56,7 +56,17 @@ public class DateTool {
        return time;
        
    }
-   
+
+    /**
+     * 获取自定义时间
+     * @return
+     */
+    public static String getTime(String format){
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        String time=formatter.format(new Date());
+        return time;
+    }
+
    /**
     * 返回星期数
     * @Description: TODO

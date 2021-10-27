@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/juc")
 @CrossOrigin("*")
-@Api(value = "事务多数据源测试", tags = { "事务多数据源测试Api文档" })
+@Api(value = "事务多数据源测试", tags = {"事务多数据源测试Api文档"})
 public class JucUserController {
 
     @Autowired
@@ -47,17 +47,16 @@ public class JucUserController {
     }
 
     /**
-     *  先调用update2 再调用update3
-     *
-     *  整个事务过程： 假设数据库用户名称为abc （2、3顺序无所谓）
-     *
-     *  1.update2开启事务读取到用户名称abc
-     *  2.update2开始休眠（模拟事务处理中）
-     *  3.update3开启事务读取到用户名称abc
-     *  4.update3修改用户名称为bbb并提交事务 （此时数据库里用户名称为bbb）
-     *  5.update2结束休眠，再次读取到的用户名称是abc （读取的是快照中的）
-     *  6.update2修改用户名称为aaa并提交事务 （此时数据库里用户名称为aaa）
-     *
+     * 先调用update2 再调用update3
+     * <p>
+     * 整个事务过程： 假设数据库用户名称为abc （2、3顺序无所谓）
+     * <p>
+     * 1.update2开启事务读取到用户名称abc
+     * 2.update2开始休眠（模拟事务处理中）
+     * 3.update3开启事务读取到用户名称abc
+     * 4.update3修改用户名称为bbb并提交事务 （此时数据库里用户名称为bbb）
+     * 5.update2结束休眠，再次读取到的用户名称是abc （读取的是快照中的）
+     * 6.update2修改用户名称为aaa并提交事务 （此时数据库里用户名称为aaa）
      */
     @GetMapping("/update2")
     public Result update2() {
@@ -70,9 +69,9 @@ public class JucUserController {
     }
 
     // TODO: 2020/12/27  
-    @GetMapping("/getUserManyDataSource")
-    public Result getUserManyDataSource() {
-        return jucUserService.getUserManyDataSource();
+    @GetMapping("/updateUserManyDataSource")
+    public Result updateUserManyDataSource() {
+        return jucUserService.updateUserMaster();
     }
 
 }
