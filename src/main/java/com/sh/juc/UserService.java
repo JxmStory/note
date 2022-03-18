@@ -90,7 +90,7 @@ public class UserService {
 
 
     /**
-     * 调用方和被调用方属于同一个component时
+     * 调用方(无注解)和被调用方(有注解)属于同一个component时
      * 被调用方的 @Transacational注解无效
      * 原因：spring 在扫描bean的时候会扫描方法上是否包含@Transactional注解
      * 如果有，spring会生成代理类 代理类方法在被调用时就会启动transaction
