@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class SemaphoreTest {
 
@@ -162,9 +161,6 @@ public class SemaphoreTest {
             }
         }).start();
     }
-
-    ReentrantLock locl = new ReentrantLock();
-
 
 //    private void doAcquireSharedInterruptibly(int arg) throws InterruptedException {
 //        final Node node = addWaiter(Node.SHARED);             // 1. 将当前的线程封装成 Node 加入到 Sync Queue 里面
