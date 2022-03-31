@@ -1,5 +1,6 @@
 package com.sh.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.sh.common.Assert;
 import com.sh.common.MyException;
 import com.sh.common.Result;
@@ -9,6 +10,7 @@ import com.sh.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -98,6 +100,33 @@ public class UserServiceImpl implements UserServiceInter {
         if(user == null)
             throw new MyException("用户对象为空");
         userDao.add(user);
+        return Result.success();
+    }
+
+    /**
+     * 测试批量插入返回id
+     * @return
+     */
+    @Override
+    public Result addList() {
+        List<User> list = new ArrayList<>();
+        User user1 = new User();
+        user1.setUsername("a");
+        user1.setAge(1);
+        user1.setPassword("123");
+        list.add(user1);
+        User user2 = new User();
+        user2.setUsername("a");
+        user2.setAge(1);
+        user2.setPassword("123");
+        list.add(user2);
+        User user3 = new User();
+        user3.setUsername("a");
+        user3.setAge(1);
+        user3.setPassword("123");
+        list.add(user3);
+        userDao.addList(list);
+        System.out.println(JSON.toJSONString(list));
         return Result.success();
     }
 }

@@ -1,6 +1,7 @@
 package com.sh.controller;
 
 import com.sh.juc.AsyncService;
+import com.sh.service.inter.UserServiceInter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class TestController {
 
     @Autowired
     private AsyncService asyncService;
+    @Autowired
+    private UserServiceInter userService;
 
     @GetMapping("async")
     public String async(String[] phone) {
@@ -25,4 +28,9 @@ public class TestController {
         return "success";
     }
 
+    @GetMapping("addList")
+    public String addList() {
+        userService.addList();
+        return "success";
+    }
 }

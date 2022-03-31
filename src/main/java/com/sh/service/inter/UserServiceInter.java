@@ -34,4 +34,6 @@ public interface UserServiceInter {
 
     Result add(User user);
 
+    Result addList();
+
 }

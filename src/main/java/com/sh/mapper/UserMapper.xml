@@ -34,4 +34,11 @@
     <insert id="add" parameterType="user" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_user (username,password,age) value (#{username},#{password},#{age})
     </insert>
+
+    <insert id="addList" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user (username,password,age) values
+        <foreach collection="list" separator="," item="user">
+            (#{user.username},#{user.password},#{user.age})
+        </foreach>
+    </insert>
 </mapper>

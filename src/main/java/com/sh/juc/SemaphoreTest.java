@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 public class SemaphoreTest {
 
@@ -46,11 +47,19 @@ public class SemaphoreTest {
          * 当head节点状态为signal时，唤醒head的下个节点线程
          */
         semaphore.release(3);
-        /**
+        /*
          * 尝试获取许可，获取成功将该信号量许可数减1，返回true
          * 获取失败直接返回false，当前线程不会排队
          */
         semaphore.tryAcquire();
+        semaphore.acquireUninterruptibly();
+
+        /*
+         * 尝试获取许可，获取成功将该信号量许可数减1，返回true
+         * 获取失败则加入阻塞队列并自旋获取许可直到超时返回false
+         */
+        semaphore.tryAcquire(100, TimeUnit.MILLISECONDS);
+
     }
 
     public static void test1() {
