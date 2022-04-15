@@ -41,4 +41,30 @@
             (#{user.username},#{user.password},#{user.age})
         </foreach>
     </insert>
+
+    <update id="updateList">
+        update t_user set
+        username =
+        case id
+        <foreach collection="list" item="user" separator=" ">
+            when #{user.id} then #{user.username}
+        </foreach>
+        end,
+        password =
+        case id
+        <foreach collection="list" item="user" separator=" ">
+            when #{user.id} then #{user.password}
+        </foreach>
+        end,
+        age =
+        case id
+        <foreach collection="list" item="user" separator=" ">
+            when #{user.id} then #{user.age}
+        </foreach>
+        end
+        where id in
+        <foreach collection="list" item="user" separator="," open="(" close=")">
+            #{user.id}
+        </foreach>
+    </update>
 </mapper>

@@ -134,4 +134,8 @@ public class UserController {
         return Result.success(list);
     }
 
+    @GetMapping("/updateList")
+    public Result updateList(){
+        return userService.updateList();
+    }
 }

@@ -22,4 +22,6 @@ public interface UserDao {
     void add(User user);
 
     void addList(List<User> list);
+
+    void updateList(List<User> list);
 }

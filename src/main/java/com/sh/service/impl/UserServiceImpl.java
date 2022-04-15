@@ -129,4 +129,36 @@ public class UserServiceImpl implements UserServiceInter {
         System.out.println(JSON.toJSONString(list));
         return Result.success();
     }
+
+    @Override
+    public Result updateList() {
+        List<User> list = new ArrayList<>();
+
+        User user1 = new User();
+        user1.setId(1);
+        user1.setUsername("a");
+        user1.setAge(1);
+        user1.setPassword("123");
+        list.add(user1);
+
+        User user2 = new User();
+        user2.setId(2);
+        user2.setUsername("a");
+        user2.setAge(1);
+        user2.setPassword("123");
+        list.add(user2);
+
+        User user3 = new User();
+        user3.setId(3);
+        user3.setUsername("a");
+        user3.setAge(1);
+        user3.setPassword("123");
+        list.add(user3);
+
+        userDao.updateList(list);
+        System.out.println(JSON.toJSONString(list));
+        return Result.success();
+    }
+
+
 }

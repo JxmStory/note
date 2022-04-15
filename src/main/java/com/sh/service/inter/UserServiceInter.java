@@ -36,4 +36,7 @@ public interface UserServiceInter {
 
     Result addList();
 
+    // 不加注解使用默认数据库master
+    Result updateList();
+
 }
