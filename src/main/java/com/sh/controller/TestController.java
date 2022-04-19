@@ -1,5 +1,6 @@
 package com.sh.controller;
 
+import com.sh.common.redis.RedisUtil;
 import com.sh.juc.AsyncService;
 import com.sh.service.inter.UserServiceInter;
 import org.slf4j.Logger;
@@ -19,6 +20,8 @@ public class TestController {
     private AsyncService asyncService;
     @Autowired
     private UserServiceInter userService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @GetMapping("async")
     public String async(String[] phone) {
@@ -33,4 +36,39 @@ public class TestController {
         userService.addList();
         return "success";
     }
+
+    @GetMapping("rds")
+    public String rdsTest(String name, String value) {
+        redisUtil.set(name, value);
+        return name + ":" + redisUtil.get(name);
+    }
+
+    @GetMapping("lock")
+    public String tryLock(String name, String value) throws InterruptedException {
+        Boolean flag = redisUtil.tryLock(name, value, 5000);
+        if (flag) {
+            logger.info("redis加锁成功");
+        } else {
+            logger.info("redis加锁失败");
+            return "try again later!";
+        }
+        Thread.sleep(3000);
+        redisUtil.unlock(name, value);
+        return "success";
+    }
+
+    @GetMapping("block")
+    public String blockLock(String name, String value) throws InterruptedException {
+        Boolean flag = redisUtil.lock(name, value, 10000, 3000);
+        if (flag) {
+            logger.info("redis加锁成功");
+        } else {
+            logger.info("redis加锁失败");
+            return "try again later!";
+        }
+        Thread.sleep(5000);
+        redisUtil.unLockLua(name, value);
+        return "success";
+    }
+
 }
