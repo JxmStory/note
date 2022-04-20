@@ -327,7 +327,6 @@ root     21746     1  0 Apr16 ?        00:06:57 ./bin/redis-server *:6385 [clust
 
 ```
 
-
 ---
 
 # 总结
