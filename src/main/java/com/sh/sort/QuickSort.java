@@ -1,4 +1,4 @@
-package com.sh;
+package com.sh.sort;
 
 import java.util.Arrays;
 
