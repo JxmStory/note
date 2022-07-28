@@ -67,4 +67,12 @@
             #{user.id}
         </foreach>
     </update>
+
+    <select id="getMap" resultType="java.util.Map">
+        select id,username from t_user
+    </select>
+
+    <select id="listMap" resultType="java.util.Map">
+        select phone from t_user
+    </select>
 </mapper>

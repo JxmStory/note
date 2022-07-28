@@ -1,8 +1,10 @@
 package com.sh.dao;
 
 import com.sh.entity.User;
+import org.apache.ibatis.annotations.MapKey;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -24,4 +26,9 @@ public interface UserDao {
     void addList(List<User> list);
 
     void updateList(List<User> list);
+
+    @MapKey("id")
+    Map<Integer, String> getMap();
+
+    List<Map<String, String>> listMap();
 }

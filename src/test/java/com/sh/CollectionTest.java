@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -223,4 +224,50 @@ public class CollectionTest {
         System.out.println(JSON.toJSONString(list));
     }
 
+    @Test
+    public void listToMap() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        list.add(new HashMap<String, String>(){{
+            put("ip","1.1.1");
+            put("port","1");
+        }});
+        list.add(new HashMap<String, String>(){{
+            put("ip","2.2.2");
+            put("port","2");
+        }});
+        System.out.println(list.stream().collect(Collectors.toMap(m -> m.get("ip"), m -> m.get("port"))));
+
+    }
+
+    @Test
+    public void mergeMap() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        list.add(new HashMap<String, String>(){{
+            put("name","a");
+            put("score","5");
+        }});
+        list.add(new HashMap<String, String>(){{
+            put("name","a");
+            put("score","10");
+        }});
+        list.add(new HashMap<String, String>(){{
+            put("name","b");
+            put("score","10");
+        }});
+        list.add(new HashMap<String, String>(){{
+            put("name","b");
+            put("score","2");
+        }});
+        list.add(new HashMap<String, String>(){{
+            put("name","c");
+            put("score","2");
+        }});
+        Map<String, Integer> map = new HashMap<>();
+        list.forEach(e -> {
+            map.merge(e.get("name"), Integer.valueOf(e.get("score")), (a, b) -> {
+                return a + b;
+            });
+        });
+        logger.info("根据name合并计算后的map结果为：{}", JSON.toJSONString(map));
+    }
 }
