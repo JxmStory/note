@@ -9,6 +9,7 @@ import com.sh.excel.ExcelUtils;
 import com.sh.service.inter.UserServiceInter;
 import io.swagger.annotations.*;
 import jxl.format.Colour;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,8 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Description:
@@ -137,5 +137,19 @@ public class UserController {
     @GetMapping("/updateList")
     public Result updateList(){
         return userService.updateList();
+    }
+
+    public static void main(String[] args) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(new Date());
+//        // 获取间隔7天后的时间
+//        calendar.add(Calendar.DAY_OF_YEAR, 7);
+//        Date expiryDate = calendar.getTime();
+//        System.out.println(DateFormatUtils.format(expiryDate, "yyyy-MM-dd HH:mm:ss"));
+        String tr = "true";
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put("isRebulid", tr);
+        System.out.println(properties.get("isRebulid").toString());
+        System.out.println(("true").equals(properties.get("isRebulid").toString()));
     }
 }

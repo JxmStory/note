@@ -3,6 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.sh.dao.UserDao" >
+
+    <resultMap id="baseUserMapper" type="user">
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <association property="aage" javaType="age" >
+            <result property="age" column="age"/>
+        </association>
+    </resultMap>
+
     <select id="getMaster" parameterType="Integer" resultType="user">
         SELECT * FROM t_user WHERE id = #{id}
     </select>
@@ -29,6 +38,10 @@
 
     <select id="list" resultType="user">
         SELECT * FROM t_user
+    </select>
+
+    <select id="getList" resultMap="baseUserMapper">
+        SELECT username, password, age FROM t_user
     </select>
 
     <insert id="add" parameterType="user" useGeneratedKeys="true" keyProperty="id">

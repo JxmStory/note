@@ -1,5 +1,6 @@
 package com.sh.excel;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -136,5 +137,12 @@ public class ExcelFormat extends ExportFormat {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	  
+	}
+
+	public static void main(String[] args) {
+		ArrayList<String> list = new ArrayList<String>();
+		System.out.println(list.contains("Easy"));
+		System.out.println("7.0.6".compareTo("7.0.15"));
+		System.out.println("8.0.13".compareTo("7.0.15"));
 	}
 }

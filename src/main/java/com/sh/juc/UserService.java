@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Description:
@@ -179,5 +183,20 @@ public class UserService {
         return result;
     }
 
+
+    public static void main(String[] args) {
+        String str = "匹配一个或多个123数字字符";
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(str);
+
+        int start = 0, end = 0;
+        while (matcher.find()) {
+            start = matcher.start();
+            end = matcher.end();
+        }
+        System.out.println(start + "+" + end);
+        // 移除str最后一个数字1234
+        System.out.println(str.substring(0, start) + str.substring(end));
+    }
 
 }

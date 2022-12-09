@@ -12,8 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Date;
 import java.util.Map;
 
 @RestController
@@ -162,4 +164,47 @@ public class ParamController {
     public Result inviteList() {
         return Result.success(InviteMarquee.list);
     }
+
+
+    @RequestMapping(value = {"callDownloadFile"}, method = RequestMethod.GET)
+    public Result callDownloadFile(String deployNo) {
+        try {
+            URL url = new URL("http://20.198.118.97/download_excel/guihua/test?getid_input_all=&getgb_input_all=&guihuaid_input_all=");
+            String directoryPath = "C:\\Users\\季小沫\\Desktop\\abc";
+            String fileName = deployNo + ".xls";
+            String saveFilePath = directoryPath + File.separator + fileName;
+            // 创建文件夹
+            createDirectory(directoryPath);
+
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            int responseCode = httpConn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream inputStream = httpConn.getInputStream();
+                OutputStream outputStream = new FileOutputStream(saveFilePath);
+                int bytesRead = -1;
+                byte[] buffer = new byte[4096];
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                outputStream.close();
+                inputStream.close();
+            } else {
+                System.out.println("GET请求失败，响应码: " + responseCode);
+            }
+            httpConn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.success();
+    }
+
+
+    // 创建文件夹（如果不存在）
+    private static void createDirectory(String directoryPath) {
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+    }
+
 }

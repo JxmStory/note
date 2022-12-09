@@ -3,6 +3,7 @@ package com.sh;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sh.utils.DateTool;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,5 +67,14 @@ public class TimeTest {
         Map<String, Object> map = new HashMap<>();
         map.put("json", json);
         System.out.println(JSON.toJSONString(map.get("json")));
+    }
+
+    public static void main(String[] args) {
+        String a = (String) null;
+        if(StringUtils.isBlank(a)) {
+            System.out.println("aaaa" + a);
+        } else {
+            System.out.println("bbbb" + a);
+        }
     }
 }

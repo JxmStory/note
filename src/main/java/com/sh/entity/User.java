@@ -27,6 +27,12 @@ public class User implements Serializable {
     @ApiModelProperty(value = "年龄", dataType = "Integer")
     private Integer age;
 
+    private Age aage;
+
+    public void setAage(Age aage) {
+        this.aage = aage;
+    }
+
     public Integer getId() {
         return id;
     }

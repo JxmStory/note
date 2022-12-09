@@ -1,6 +1,7 @@
 package com.sh;
 
 import com.sh.dao.UserDao;
+import com.sh.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,12 @@ public class NoteApplicationTests {
 
 	@Test
 	public void keyMap() {
-		Map map = userDao.getMap();
-		Iterator iterator = map.keySet().iterator();
-		if (iterator.hasNext())
-			System.out.println(map.get(iterator.next()));
+		List<User> list = userDao.getList();
+		list.forEach(e -> System.out.println(e));
+//		Map map = userDao.getMap();
+//		Iterator iterator = map.keySet().iterator();
+//		if (iterator.hasNext())
+//			System.out.println(map.get(iterator.next()));
 	}
 
 	@Test

@@ -21,6 +21,8 @@ public interface UserDao {
 
     List list();
 
+    List<User> getList();
+
     void add(User user);
 
     void addList(List<User> list);
