@@ -1,5 +1,6 @@
 package com.sh;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
@@ -264,10 +265,12 @@ public class CollectionTest {
         }});
         Map<String, Integer> map = new HashMap<>();
         list.forEach(e -> {
+            // map.merge(key,需要合入的object,(原始object，需要合入的object)->{返回合并后的object})
             map.merge(e.get("name"), Integer.valueOf(e.get("score")), (a, b) -> {
                 return a + b;
             });
         });
         logger.info("根据name合并计算后的map结果为：{}", JSON.toJSONString(map));
+        System.out.println("abc");
     }
 }
