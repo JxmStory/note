@@ -186,4 +186,8 @@ public class Lottery implements Serializable {
                 ", type='" + type + '\'' +
                 '}';
     }
+
+    public static void main(String[] args) {
+        System.out.println("abc");
+    }
 }
